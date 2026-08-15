@@ -1,13 +1,37 @@
 const themeToggle=document.getElementById('themeToggle');
+const languageToggle=document.getElementById('languageToggle');
+const sunIcon='<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41"/></svg>';
+const moonIcon='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.1A8.5 8.5 0 0 1 9.9 3.5 8.5 8.5 0 1 0 20.5 14.1Z"/></svg>';
 function setTheme(theme){
   const light=theme==='light';
   document.body.classList.toggle('light',light);
-  themeToggle.textContent=light?'☾':'☀';
+  themeToggle.innerHTML=light?sunIcon:moonIcon;
   themeToggle.setAttribute('aria-label',light?'Switch to dark mode':'Switch to light mode');
+  themeToggle.title=light?'Light mode':'Dark mode';
   localStorage.setItem('shahd-theme',theme);
 }
+const translations={
+  en:{nav:['Home','About','Services','Portfolio','Contact'],status:'Ready to create',heroTitle:'UX/UI<br><span class="grad">Designer</span>',typing:'Designing intuitive experiences that feel effortless.',heroText:"I'm Shahd Ibrahim — I turn user needs and complex ideas into clear, beautiful digital products that people enjoy using.",chips:['User Research','UI Design','Prototyping','Design Systems'],actions:['View projects ↗','Contact me ✉'],cards:['UX Strategy','Research first','UI Design ✦','Beauty meets clarity'],kickers:['About me','What I do','Selected work','Contact me'],titles:['Designing with <span class="grad">purpose</span>','Services built for <span class="grad">impact</span>','Portfolio <span class="grad">Showcase</span>',"Let's create something <span class=\"grad\">great</span>"],subtitles:['Understanding people is where every meaningful interface begins.','From early discovery to polished, scalable product experiences.','Three experiences, each shaped around real needs and thoughtful design decisions.',"Have a project in mind? Send me a message and let's talk about it."],aboutTitle:"Hello, I'm <span class=\"grad\">Shahd</span>",about:["I'm a UX/UI Designer passionate about crafting digital experiences that feel natural and intuitive. I focus on understanding user behavior to design interfaces that perfectly balance aesthetics with functionality.","To me, great design isn't just about how it looks, but how effortlessly it solves problems for the people using it."],skills:['User Research','Wireframing','Prototyping','Usability Testing','Visual Design','Responsive Design','User Flows','Accessibility','Problem Solving'],serviceTitles:['UX Strategy & Research','UI/UX Design','Prototyping & Design Systems'],serviceText:['Analyzing user behaviors and market trends to build a solid strategic foundation for every product.','Crafting intuitive and aesthetically pleasing interfaces that perfectly balance beauty with functionality.','Developing interactive prototypes and scalable design systems to ensure long-term consistency.'],projectTitles:['Portfolio Landing Page','Travel App Design','Glamora App Design'],projectText:['A portfolio landing page showcasing my work and design approach.','A travel app that helps users plan trips and explore destinations with ease.','A beauty e-commerce app focused on personalized shopping.'],contactTitle:'Get in Touch',contactText:"I'm open to UX/UI opportunities, collaborations, and exciting new product ideas.",labels:['Name','Email','Message'],placeholders:['Your name','you@example.com','Tell me about your project...'],send:'Send message ↗',footer:'UX/UI Designer · Designed with intention'},
+  ar:{nav:['الرئيسية','عني','الخدمات','أعمالي','تواصل معي'],status:'جاهزة للإبداع',heroTitle:'مصممة<br><span class="grad">تجربة وواجهة مستخدم</span>',typing:'أصمم تجارب بديهية وسلسة.',heroText:'أنا شهد إبراهيم، أحوّل احتياجات المستخدمين والأفكار المعقدة إلى منتجات رقمية واضحة وجميلة وممتعة الاستخدام.',chips:['بحث المستخدم','تصميم الواجهات','النماذج الأولية','أنظمة التصميم'],actions:['شاهد أعمالي ↗','تواصل معي ✉'],cards:['استراتيجية UX','البحث أولًا','تصميم UI ✦','الجمال يلتقي بالوضوح'],kickers:['نبذة عني','ماذا أقدم','أعمال مختارة','تواصل معي'],titles:['تصميم له <span class="grad">هدف</span>','خدمات تصنع <span class="grad">أثرًا</span>','معرض <span class="grad">أعمالي</span>','لنصنع شيئًا <span class="grad">رائعًا</span>'],subtitles:['فهم الناس هو بداية كل واجهة ذات معنى.','من الاكتشاف المبكر إلى تجارب منتجات متقنة وقابلة للتوسع.','ثلاث تجارب صُممت حول احتياجات حقيقية وقرارات مدروسة.','لديك مشروع؟ أرسل لي رسالة لنتحدث عنه.'],aboutTitle:'مرحبًا، أنا <span class="grad">شهد</span>',about:['أنا مصممة UX/UI شغوفة بصناعة تجارب رقمية طبيعية وبديهية، وأركز على فهم سلوك المستخدم لتصميم واجهات توازن بين الجمال والوظيفة.','بالنسبة لي، التصميم الرائع لا يتعلق بالشكل فقط، بل بمدى سهولة حله لمشكلات المستخدمين.'],skills:['بحث المستخدم','التخطيط الهيكلي','النماذج الأولية','اختبار سهولة الاستخدام','التصميم البصري','التصميم المتجاوب','مسارات المستخدم','إمكانية الوصول','حل المشكلات'],serviceTitles:['استراتيجية وبحث UX','تصميم UI/UX','النماذج الأولية وأنظمة التصميم'],serviceText:['تحليل سلوك المستخدم واتجاهات السوق لبناء أساس استراتيجي قوي لكل منتج.','تصميم واجهات بديهية وجذابة توازن بين الجمال والوظيفة.','تطوير نماذج أولية تفاعلية وأنظمة تصميم قابلة للتوسع لضمان الاتساق.'],projectTitles:['صفحة معرض أعمال','تصميم تطبيق سفر','تصميم تطبيق Glamora'],projectText:['صفحة شخصية تعرض أعمالي ومنهجي في التصميم.','تطبيق سفر يساعد المستخدمين على تخطيط الرحلات واستكشاف الوجهات بسهولة.','تطبيق تجارة إلكترونية للجمال يركز على تجربة تسوق شخصية.'],contactTitle:'لنتواصل',contactText:'أرحب بفرص UX/UI والتعاون وأفكار المنتجات الجديدة والمميزة.',labels:['الاسم','البريد الإلكتروني','الرسالة'],placeholders:['اسمك','you@example.com','أخبرني عن مشروعك...'],send:'إرسال الرسالة ↗',footer:'مصممة UX/UI · صُمم بعناية'}
+};
+function fillAll(selector,values,html=false){document.querySelectorAll(selector).forEach((el,i)=>{if(values[i]!==undefined)el[html?'innerHTML':'textContent']=values[i]})}
+function setLanguage(language){
+  const arabic=language==='ar';
+  const t=translations[language];
+  document.documentElement.lang=language;
+  document.documentElement.dir=arabic?'rtl':'ltr';
+  document.title=arabic?'شهد إبراهيم | مصممة UX/UI':'Shahd Ibrahim | UX/UI Designer';
+  fillAll('.links a',t.nav);document.querySelector('.status').lastChild.textContent=' '+t.status;
+  document.querySelector('.hero h1').innerHTML=t.heroTitle;document.querySelector('.typing').textContent=t.typing;document.querySelector('.hero-copy>p').textContent=t.heroText;
+  fillAll('.chips span',t.chips);fillAll('.actions a',t.actions);fillAll('.float-card b,.float-card small',t.cards);fillAll('.kicker',t.kickers);fillAll('.title',t.titles,true);fillAll('.subtitle',t.subtitles);
+  document.querySelector('.about-card h3').innerHTML=t.aboutTitle;fillAll('.about-card p',t.about);fillAll('.skill b',t.skills);fillAll('.service h3',t.serviceTitles);fillAll('.service p',t.serviceText);fillAll('.project h3',t.projectTitles);fillAll('.project-body>p',t.projectText);
+  document.querySelector('.contact-info h3').textContent=t.contactTitle;document.querySelector('.contact-info>p').textContent=t.contactText;
+  document.querySelectorAll('.form label').forEach((label,i)=>label.firstChild.textContent=t.labels[i]);document.querySelectorAll('.form input,.form textarea').forEach((el,i)=>el.placeholder=t.placeholders[i]);document.querySelector('.form button').textContent=t.send;document.querySelector('.footer .shell>span:last-child').textContent=t.footer;
+  languageToggle.textContent=arabic?'EN':'AR';
+  languageToggle.setAttribute('aria-label',arabic?'التبديل إلى الإنجليزية':'Switch to Arabic');
+  localStorage.setItem('shahd-language',language);
+}
 themeToggle.addEventListener('click',()=>setTheme(document.body.classList.contains('light')?'dark':'light'));
-document.documentElement.lang='en';
-document.documentElement.dir='ltr';
-localStorage.removeItem('shahd-language');
+languageToggle.addEventListener('click',()=>setLanguage(document.documentElement.lang==='ar'?'en':'ar'));
 setTheme(localStorage.getItem('shahd-theme')||'dark');
+setLanguage(localStorage.getItem('shahd-language')||'en');
